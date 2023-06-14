@@ -14,6 +14,10 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATE_DIR = Path(BASE_DIR) / 'templates'
+STATIC_DIR = Path(BASE_DIR) / 'static'
+MEDIA_DIR = Path(BASE_DIR) / 'media'
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,9 +29,9 @@ SECRET_KEY = 'django-insecure-0_7@^b0e5o-&p2ty4l*2&(b0zecy^*@xi9hm8+1t961t3ld3f^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['167.99.90.105', 'localhost']
+ALLOWED_HOSTS = []
 
-
+#'167.99.90.105', 'localhost',
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'landing',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +59,7 @@ ROOT_URLCONF = 'Ingseo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -115,13 +120,34 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'login'
+
+DJANGORESIZED_DEFAULT_SIZE = [500, 500]
+DJANGORESIZED_DEFAULT_QUALITY = 65
+DJANGORESIZED_DEFAULT_KEEP_META = True
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'PNG': ".png"}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [STATIC_DIR,]
+
+#MEDIA
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'email.host'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = true
+# EMAIL_HOST_USER = 'hi@email.com'
+# EMAIL_HOST_PASSWORD = 'password'
+# DEFAULT_FROM_EMAIL = 'hi@email.com'
